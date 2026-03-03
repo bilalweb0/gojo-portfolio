@@ -10,7 +10,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }, { threshold: 0.1 });
+const menu = document.querySelector('#mobile-menu');
+const menuLinks = document.querySelector('.nav-links');
 
+// Burger tugmani bosganda menyuni chiqarish
+menu.addEventListener('click', () => {
+    menuLinks.classList.toggle('active');
+    
+    // Burger animatsiyasi (tugmani X shakliga keltirish)
+    menu.classList.toggle('is-active');
+});
+
+// Menyu ichidagi link bosilganda menyuni yopish
+document.querySelectorAll('.nav-links a').forEach(n => n.addEventListener('click', () => {
+    menuLinks.classList.remove('active');
+}));
     cards.forEach(card => {
         card.style.opacity = 0;
         card.style.transform = 'translateY(50px)';
@@ -56,17 +70,35 @@ window.addEventListener('load', () => {
     }
     console.log("%c " + txt, "color: #a855f7; font-size: 20px; font-weight: bold;");
 });
-
-
+// 1. Dark Mode tugmasini Navbarga qo'shish
+const navMenu = document.getElementById('nav-menu');
 const themeBtn = document.createElement('button');
-themeBtn.innerText = "🌓";
-themeBtn.style.cssText = "position:fixed; top:20px; right:20px; z-index:1000; padding:10px; cursor:pointer; border-radius:50%; border:none; background:var(--primary-color); color:white;";
-document.body.appendChild(themeBtn);
+themeBtn.id = "theme-toggle";
+themeBtn.innerText = "🌙";
+const li = document.createElement('li');
+li.appendChild(themeBtn);
+navMenu.appendChild(li);
 
 themeBtn.addEventListener('click', () => {
     document.body.classList.toggle('light-theme');
-    themeBtn.innerText = document.body.classList.contains('light-theme') ? "🌙" : "☀️";
+    themeBtn.innerText = document.body.classList.contains('light-theme') ? "☀️" : "🌙";
 });
+
+// 2. Mobil Menyu Funktsiyasi
+const mobileMenu = document.getElementById('mobile-menu');
+const navLinks = document.querySelector('.nav-links');
+
+mobileMenu.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+});
+
+// 3. Link bosilganda menyuni yopish
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+    });
+});
+
 
 function updateStatus() {
     const statusText = document.getElementById('status');
@@ -91,3 +123,35 @@ const quotes = [
 
 const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
 console.log("%c" + randomQuote, "color: #a855f7; font-style: italic;");
+
+
+// Discord nikini nusxalash
+const discordBtn = document.getElementById('discord-btn');
+if(discordBtn) {
+    discordBtn.addEventListener('click', () => {
+        const nick = "bilol1bey";
+        navigator.clipboard.writeText(nick);
+        
+        // Foydalanuvchiga xabar berish
+        const originalText = document.getElementById('discord-nick').innerText;
+        document.getElementById('discord-nick').innerText = "Nusxalandi! ✅";
+        
+        setTimeout(() => {
+            document.getElementById('discord-nick').innerText = originalText;
+        }, 2000);
+        
+        console.log("Discord nik nusxalandi: " + nick);
+    });
+}
+
+// Steam va GitHub ga bosilganda maxsus xabar
+document.querySelectorAll('.social-item').forEach(item => {
+    item.addEventListener('click', (e) => {
+        if(e.currentTarget.tagName === 'A') {
+            console.log("Gojo'ning profiliga yo'naltirilmoqda...");
+        }
+    });
+});
+
+
+
