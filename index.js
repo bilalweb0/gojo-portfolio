@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// Tugmalarga bosilganda silliq harakatlanish
+
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -32,7 +32,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// JavaScript yordamida dinamik rasm effektini boshqarish
+
 const profileImg = document.querySelector('.hero-image img');
 if(profileImg) {
     profileImg.addEventListener('mouseover', () => {
@@ -40,17 +40,17 @@ if(profileImg) {
     });
 }
 
-// Sahifadagi matnlarni sekin chiqarish
+
 window.addEventListener('load', () => {
     const mainTitle = document.querySelector('.hero-text h1');
     mainTitle.style.borderRight = "3px solid #a855f7";
     
-    // Oddiy "Typing" effekti konsolda
+
     let i = 0;
     let txt = 'JavaScript olamiga xush kelibsan, Gojo!';
     function typeWriter() {
         if (i < txt.length) {
-            process.stdout.write(txt.charAt(i)); // Bu brauzerda ishlamaydi, faqat namuna
+            process.stdout.write(txt.charAt(i)); 
             i++;
         }
     }
