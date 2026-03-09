@@ -1,3 +1,16 @@
+window.addEventListener('load', () => {
+    const loader = document.getElementById('loader-wrapper');
+
+    // 2.5 sekunddan keyin spinnerni o'chirish
+    setTimeout(() => {
+        loader.style.opacity = '0';
+        
+        // Animatsiya tugagandan keyin blokni butunlay o'chirish
+        setTimeout(() => {
+            loader.style.display = 'none';
+        }, 500); 
+    }, 500); // 2500ms = 2.5 sekund
+});
 // Sahifa yuklanganda elementlarning sekin chiqib kelishi
 document.addEventListener('DOMContentLoaded', () => {
     const cards = document.querySelectorAll('.card');
@@ -154,4 +167,43 @@ document.querySelectorAll('.social-item').forEach(item => {
 });
 
 
+
+// Sayt to'liq yuklangandan keyin ishlasin
+document.addEventListener("DOMContentLoaded", () => {
+    
+    // --- 1. TEPAGA QAYTISH TUGMASI ---
+    const backToTopBtn = document.getElementById("backToTop");
+
+    if (backToTopBtn) { // Agar tugma HTMLda bo'lsa
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 400) {
+                backToTopBtn.style.display = "block";
+            } else {
+                backToTopBtn.style.display = "none";
+            }
+        });
+
+        backToTopBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+    }
+
+    // --- 2. ANIMATSIYA (Sen yoqtirgan bomba qism) ---
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    const hiddenElements = document.querySelectorAll('.banner, .adv-item, .good-card, .consult-item');
+    hiddenElements.forEach((el) => {
+        el.classList.add('hidden-animation');
+        observer.observe(el);
+    });
+});
 
